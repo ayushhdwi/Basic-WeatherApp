@@ -1,4 +1,6 @@
-const forecast = require('./utils/forecast')
+const forecast = require('./utils/forecast');
+// require("dotenv").config();
+
 const address = process.argv[2];
 
 if (!address) {
