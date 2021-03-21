@@ -1,19 +1,21 @@
-const request = require("request");
-// const got = require('got');
+const got = require('got');
 
+const forecast = (address,callback) => {
+    const url = "http://api.openweathermap.org/data/2.5/weather?q=" + encodeURIComponent(address) + "&appid=67aade946b6d1789477ff94d066be2c6";
 
-const forecast = (latitude, longitude, callback) => {
-    const url = 'https://api.darksky.net/forecast/9d1465c6f3bb7a6c71944bdd8548d026/' + latitude + ',' + longitude
-
-    request({ url, json: true }, (error, { body }) => {
-        if (error) {
-            callback('Unable to connect to weather service!', undefined)
-        } else if (body.error) {
-            callback('Unable to find location', undefined)
-        } else {
-            callback(undefined, body.daily.data[0].summary + ' It is currently ' + body.currently.temperature + ' degress out. There is a ' + body.currently.precipProbability + '% chance of rain.')
-        }
-    })
+    got(url,{responseType:'json',method:"POST"}).then(response => {
+        callback(response.body,undefined);
+    }).catch(error => {
+        callback(undefined,"error : "+error);
+    });
 }
 
-module.exports = forecast
+// forecast('delhi',(res,err)=>{
+//     if(err) {
+//         console.log(err);
+//     } else {
+//         console.log(res);
+//     }
+// })
+
+module.exports = forecast;
