@@ -11,12 +11,4 @@ const forecast = (address,callback) => {
     });
 }
 
-// forecast('delhi',(res,err)=>{
-//     if(err) {
-//         console.log(err);
-//     } else {
-//         console.log(res);
-//     }
-// })
-
 module.exports = forecast;
